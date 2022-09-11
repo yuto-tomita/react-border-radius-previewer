@@ -7,7 +7,8 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
-    'plugin:react/recommended'
+    'plugin:react/recommended',
+    'plugin:tailwindcss/recommended'
   ],
   globals: {
     Atomics: 'readonly',
@@ -22,7 +23,7 @@ module.exports = {
     sourceType: 'module',
     project: './tsconfig.json'
   },
-  plugins: ['@typescript-eslint', 'react'],
+  plugins: ['@typescript-eslint', 'react', 'tailwindcss'],
   rules: {
     quotes: ['error', 'single'],
     'arrow-parens': ['error', 'always'],
