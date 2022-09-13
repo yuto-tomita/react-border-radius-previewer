@@ -21,7 +21,7 @@ const InputRange: FC<Props> = ({
       // className="mb-6 w-full h-0.5 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
       className={`${style} ${parentClassName}`}
       min="0"
-      max="50"
+      max="100"
     />
   )
 }
