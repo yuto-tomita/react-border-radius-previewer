@@ -4,7 +4,7 @@
 
 @layer base {
 	h1 {
-		@apply text-4xl pb-4;
+		@apply text-4xl pb-4 py-7;
 		font-weight: 800;
 	}
 }

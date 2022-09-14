@@ -5,10 +5,10 @@ input[type=range] {
 
 /* rangeのグレーの線の部分 */
 input[type=range]::-webkit-slider-runnable-track {
-	@apply bg-gray-300 h-2 w-full cursor-pointer rounded-md;
+	@apply border-dashed h-0 w-full cursor-pointer rounded-md;
 }
 
 /* rangeの黒の動かす部分 */
 input[type=range]::-webkit-slider-thumb {
-	@apply bg-black cursor-pointer w-4 h-4 appearance-none -mt-1;
+	@apply bg-black cursor-pointer w-3 h-3 appearance-none -mt-1.5;
 }
