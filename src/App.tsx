@@ -1,32 +1,102 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import { InputRange } from '@/components/ui'
 import './App.css'
+import { resolve } from 'path'
 
-function App() {
-  const [count, setCount] = useState(0)
+export const App = () => {
+  const [top, setTop] = useState(0)
+  const [right, setRight] = useState(0)
+  const [left, setLeft] = useState(0)
+  const [bottom, setBottom] = useState(0)
 
+  const [codeHover, setCodeHover] = useState(false)
+  const [displayClipBoard, setDisplayClipBoard] = useState(false)
+
+  const onChangeTop = (e: number) => {
+    setTop(e)
+  }
+
+  const onChangeRight = (e: number) => {
+    setRight(e)
+  }
+
+  const onChangeLeft = (e: number) => {
+    setLeft(e)
+  }
+
+  const onChangeBottom = (e: number) => {
+    setBottom(e)
+  }
+
+  const onHover = () => {
+    setCodeHover(true)
+  }
+
+  const onLeave = () => {
+    setCodeHover(false)
+  }
+
+  const sleep = (waitTime: number) => new Promise((resolve) => setTimeout(resolve, waitTime))
+
+  const onClickClipBoard = async() => {
+    setDisplayClipBoard(true)
+
+    await sleep(1500)
+
+    setDisplayClipBoard(false)
+  }
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="h-screen">
+      <h1 className="text-center">
+        BorderRadiusPreviewer
+      </h1>
+      <div className="relative mx-auto h-96 w-64">
+        <InputRange
+          onChange={onChangeTop}
+          value={top}
+          className="absolute left-8 top-8"
+        />
+        <InputRange
+          onChange={onChangeRight}
+          value={right}
+          className="absolute left-40 top-40 rotate-90"
+        />
+        <InputRange
+          onChange={onChangeLeft}
+          value={left}
+          className="absolute -left-24 top-40 rotate-90"
+        />
+        <InputRange
+          onChange={onChangeBottom}
+          value={bottom}
+          className="absolute top-72 left-8"
+        />
+        <div
+          className="box-position absolute left-11 border-2 border-gray-400"
+          style={{ 'border-radius': `${top}% ${right}% ${bottom}% ${left}%` }}
+        />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+      <div
+        className='relative w-full'
+        onMouseEnter={() => onHover()}
+        onMouseLeave={() => onLeave()}
+      >
+        <pre className="mx-4 bg-slate-800 p-10">
+          <p className="text-stone-100">{`border-radius: ${top}% ${right}% ${bottom}% ${left}%;`}</p>
+        </pre>
+        <img
+          src="src/assets/clipboard.svg"
+          className={`absolute right-8 top-4 w-5 cursor-pointer opacity-0 ${codeHover ? 'opacity-100' : ''}`}
+          onClick={() => onClickClipBoard()}
+        />
+        {
+          displayClipBoard ? (
+            <span className="absolute right-2 top-8 p-4 text-sm text-white">コピーしました!</span>
+          ) : (
+            <></>
+          )
+        }
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </div>
   )
 }
