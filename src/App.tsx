@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { InputRange } from '@/components/ui'
 import './App.css'
-import { resolve } from 'path'
 
 export const App = () => {
   const [top, setTop] = useState(0)
@@ -40,11 +39,27 @@ export const App = () => {
 
   const onClickClipBoard = async() => {
     setDisplayClipBoard(true)
-
+    await setClipboard()
     await sleep(1500)
 
     setDisplayClipBoard(false)
   }
+
+  const setClipboard = async () => {
+    console.log('come')
+    const type = 'text/plain'
+    const clipboardData = ` border-radius: ${top}% ${right}% ${bottom}% ${left}%`
+    console.log(clipboardData)
+    const blob = new Blob([clipboardData], { type })
+    const data = [new ClipboardItem({ [type]: blob })]
+
+    try {
+      await navigator.clipboard.write(data)
+    } catch {
+      alert('コピーに失敗しました。')
+    }
+  }
+
   return (
     <div className="h-screen">
       <h1 className="text-center">
