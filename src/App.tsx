@@ -92,7 +92,7 @@ export const App = () => {
         />
       </div>
       <div
-        className='relative w-full'
+        className='relative m-auto w-2/4'
         onMouseEnter={() => onHover()}
         onMouseLeave={() => onLeave()}
       >
