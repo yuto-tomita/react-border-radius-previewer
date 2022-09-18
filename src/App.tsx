@@ -27,6 +27,8 @@ export const App = () => {
     setBottom(e)
   }
 
+  const userSelectBorderRadius = { borderRadius: `${top}% ${right}% ${bottom}% ${left}%` }
+
   const onHover = () => {
     setCodeHover(true)
   }
@@ -46,10 +48,8 @@ export const App = () => {
   }
 
   const setClipboard = async () => {
-    console.log('come')
     const type = 'text/plain'
     const clipboardData = ` border-radius: ${top}% ${right}% ${bottom}% ${left}%`
-    console.log(clipboardData)
     const blob = new Blob([clipboardData], { type })
     const data = [new ClipboardItem({ [type]: blob })]
 
@@ -88,7 +88,7 @@ export const App = () => {
         />
         <div
           className="box-position absolute left-11 border-2 border-gray-400"
-          style={{ 'border-radius': `${top}% ${right}% ${bottom}% ${left}%` }}
+          style={userSelectBorderRadius}
         />
       </div>
       <div
